@@ -1,0 +1,27 @@
+# Python e Ambientes Virtuais
+.venv/
+__pycache__/
+*.py[cod]
+.python-version
+
+# Dados
+data/raw/*.parquet
+data/gold/*.parquet
+*.db
+*.duckdb
+
+# Astro / Airflow
+.astro/
+logs/
+*.pid
+
+# IDEs e Segredos
+.env
+.idea/
+.vscode/
+.DS_Store
+
+# dbt
+dbt_brasileirao/target/
+dbt_brasileirao/dbt_packages/
+dbt_brasileirao/logs/

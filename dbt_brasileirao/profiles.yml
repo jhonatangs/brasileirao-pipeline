@@ -1,0 +1,8 @@
+dbt_brasileirao:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../data/lakehouse.duckdb
+      extensions:
+        - parquet

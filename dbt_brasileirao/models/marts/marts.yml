@@ -21,3 +21,30 @@ models:
         description: "Número de pontos conquistados."
       - name: aproveitamento_pct
         description: "Percentual de aproveitamento dos pontos disputados, arredondado para 2 casas decimais."
+
+  - name: dim_matches
+    description: "Dimensão de partidas do Brasileirão 2026 com informações enriquecidas de resultado, placar e total de gols."
+    columns:
+      - name: id_partida
+        description: "Identificador único da partida."
+        tests:
+          - unique
+          - not_null
+      - name: rodada
+        description: "Número da rodada do campeonato."
+      - name: data_hora
+        description: "Data e hora da partida (timezone UTC)."
+      - name: time_mandante
+        description: "Nome do time mandante (casa)."
+      - name: time_visitante
+        description: "Nome do time visitante (fora)."
+      - name: gols_mandante
+        description: "Gols marcados pelo time mandante."
+      - name: gols_visitante
+        description: "Gols marcados pelo time visitante."
+      - name: resultado
+        description: "Resultado da partida: 'mandante', 'visitante' ou 'empate'."
+      - name: placar
+        description: "Placar da partida no formato 'gols_mandante x gols_visitante'."
+      - name: total_de_gols_partida
+        description: "Total de gols marcados na partida (gols_mandante + gols_visitante)."

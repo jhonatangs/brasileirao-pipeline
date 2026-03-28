@@ -3,6 +3,6 @@ dbt_brasileirao:
   outputs:
     dev:
       type: duckdb
-      path: ../data/lakehouse.duckdb
+      path: "{{ env_var('PROJECT_DATA_DIR', '../data') }}/lakehouse.duckdb"
       extensions:
         - parquet

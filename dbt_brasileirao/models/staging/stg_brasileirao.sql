@@ -2,7 +2,7 @@
 
 with raw_data as (
     select *
-    from read_parquet('../data/raw/brasileirao_2026.parquet')
+    from read_parquet('{{ env_var('PROJECT_DATA_DIR', '../data') }}/raw/brasileirao_2026.parquet')
 ),
 
 casted as (

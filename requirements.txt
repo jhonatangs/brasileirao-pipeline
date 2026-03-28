@@ -2,3 +2,4 @@ curl-cffi
 pandas
 pyarrow
 fastparquet
+dbt-duckdb

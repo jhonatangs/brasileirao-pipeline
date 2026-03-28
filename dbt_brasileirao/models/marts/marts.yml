@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fct_classificacao
+    description: "Tabela mart com a classificação do Brasileirão e cálculo de aproveitamento."
+    columns:
+      - name: time
+        description: "Nome do time."
+        tests:
+          - unique
+          - not_null
+      - name: jogos
+        description: "Número de jogos disputados."
+      - name: vitorias
+        description: "Número de vitórias."
+      - name: empates
+        description: "Número de empates."
+      - name: derrotas
+        description: "Número de derrotas."
+      - name: pontos
+        description: "Número de pontos conquistados."
+      - name: aproveitamento_pct
+        description: "Percentual de aproveitamento dos pontos disputados, arredondado para 2 casas decimais."

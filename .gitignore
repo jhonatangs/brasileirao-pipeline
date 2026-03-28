@@ -25,3 +25,4 @@ logs/
 dbt_brasileirao/target/
 dbt_brasileirao/dbt_packages/
 dbt_brasileirao/logs/
+.user.yml

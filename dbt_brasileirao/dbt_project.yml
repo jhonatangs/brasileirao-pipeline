@@ -34,3 +34,6 @@ models:
     staging:
       stg_brasileirao:
         +materialized: view
+    marts:
+      fct_classificacao:
+        +materialized: table

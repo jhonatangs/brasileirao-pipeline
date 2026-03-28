@@ -8,6 +8,7 @@ dependencies = [
     "beautifulsoup4>=4.14.3",
     "curl-cffi>=0.14.0",
     "dbt-duckdb>=1.10.1",
+    "duckdb>=1.5.1",
     "fastparquet>=2026.3.0",
     "html5lib>=1.1",
     "lxml>=6.0.2",

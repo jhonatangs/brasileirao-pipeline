@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_brasileirao
+    description: "Modelo de staging contendo a classificação e estatísticas do Brasileirão 2026 (via UOL Esporte)."
+    columns:
+      - name: time
+        description: "Nome do time de futebol do Campeonato Brasileiro."
+        tests:
+          - unique
+          - not_null
+      - name: jogos
+        description: "Número total de jogos disputados."
+      - name: vitorias
+        description: "Quantidade total de vitórias obtidas."
+      - name: empates
+        description: "Quantidade total de empates obtidos."
+      - name: derrotas
+        description: "Quantidade total de derrotas obtidas."
+      - name: pontos
+        description: "Pontuação total acumulada pelo time na tabela."

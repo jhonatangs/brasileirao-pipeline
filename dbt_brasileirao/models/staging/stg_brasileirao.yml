@@ -9,13 +9,28 @@ models:
         tests:
           - unique
           - not_null
+
       - name: jogos
         description: "Número total de jogos disputados."
+        tests:
+          - not_null
+
       - name: vitorias
         description: "Quantidade total de vitórias obtidas."
+        tests:
+          - not_null
+
       - name: empates
         description: "Quantidade total de empates obtidos."
+        tests:
+          - not_null
+
       - name: derrotas
         description: "Quantidade total de derrotas obtidas."
+        tests:
+          - not_null
+
       - name: pontos
         description: "Pontuação total acumulada pelo time na tabela."
+        tests:
+          - not_null

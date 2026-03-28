@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_matches_brasileirao
+    description: >
+      Staging layer para as partidas do Brasileirão 2026.
+      Lê diretamente o arquivo parquet da camada raw/bronze e garante
+      o cast explícito de todos os tipos de dados.
+    columns:
+      - name: id_partida
+        description: Identificador único da partida.
+        tests:
+          - not_null
+          - unique
+
+      - name: rodada
+        description: Número da rodada do campeonato.
+        tests:
+          - not_null
+
+      - name: data_hora
+        description: Data e hora da partida (timezone UTC).
+        tests:
+          - not_null
+
+      - name: time_mandante
+        description: Nome do time mandante (casa).
+        tests:
+          - not_null
+
+      - name: time_visitante
+        description: Nome do time visitante (fora).
+        tests:
+          - not_null
+
+      - name: placar_mandante
+        description: Gols marcados pelo time mandante. Nulo se a partida ainda não ocorreu.
+
+      - name: placar_visitante
+        description: Gols marcados pelo time visitante. Nulo se a partida ainda não ocorreu.

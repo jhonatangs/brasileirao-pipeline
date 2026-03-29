@@ -2,7 +2,7 @@ import json
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
-from agent.tools import run_query
+from agent.tools import run_query, search_web
 from agent.system_prompt import SYSTEM_PROMPT
 from agent.memory import add_interaction, get_memories_context
 
@@ -33,10 +33,32 @@ TOOLS = [
     }
 ]
 
+TOOLS.append(
+    {
+        "type": "function",
+        "function": {
+            "name": "search_web",
+            "description": "Pesquisa na web via DuckDuckGo para obter contexto atualizado, como notícias recentes, lesões de jogadores, condições climáticas e qualquer informação não disponível no banco de dados histórico.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "A consulta de busca a ser enviada ao DuckDuckGo.",
+                    }
+                },
+                "required": ["query"],
+            },
+        },
+    }
+)
+
 
 def process_tool_call(tool_name: str, tool_args: dict) -> str:
     if tool_name == "run_query":
         return run_query(tool_args["sql_query"])
+    if tool_name == "search_web":
+        return search_web(tool_args["query"])
     return f"Ferramenta desconhecida: {tool_name}"
 
 
@@ -79,7 +101,10 @@ def ask_agent(question: str, conversation_history: list, user_id: str = USER_ID)
             tool_name = tool_call.function.name
             tool_args = json.loads(tool_call.function.arguments)
 
-            print(f"\n🔍 Executando query SQL:\n{tool_args.get('sql_query', '')}\n")
+            if tool_name == "run_query":
+                print(f"\n🔍 Executando query SQL:\n{tool_args.get('sql_query', '')}\n")
+            elif tool_name == "search_web":
+                print(f"\n🌐 Buscando na web:\n{tool_args.get('query', '')}\n")
 
             result = process_tool_call(tool_name, tool_args)
 

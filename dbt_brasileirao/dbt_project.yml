@@ -34,6 +34,14 @@ models:
     staging:
       stg_brasileirao:
         +materialized: view
+      stg_matches_brasileirao:
+        +materialized: view
+      stg_matches_brasileirao_future:
+        +materialized: view
     marts:
       fct_classificacao:
+        +materialized: table
+      fct_matches_brasileirao:
+        +materialized: table
+      fct_matches_brasileirao_future:
         +materialized: table

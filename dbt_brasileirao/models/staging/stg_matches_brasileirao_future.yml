@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_matches_brasileirao_future
+    description: >
+      Staging layer para as partidas futuras do Brasileirão 2026.
+      Lê diretamente o arquivo parquet da camada raw/bronze e garante
+      o cast explícito de todos os tipos de dados. Contém apenas partidas
+      ainda não encerradas (status != 'match-ended').
+    columns:
+      - name: id_partida
+        description: Identificador único da partida.
+        tests:
+          - not_null
+          - unique
+
+      - name: rodada
+        description: Número da rodada do campeonato.
+        tests:
+          - not_null
+
+      - name: data_hora
+        description: Data e hora prevista da partida (timezone UTC).
+
+      - name: time_mandante
+        description: Nome do time mandante (casa).
+        tests:
+          - not_null
+
+      - name: time_visitante
+        description: Nome do time visitante (fora).
+        tests:
+          - not_null
+
+      - name: status
+        description: Status atual da partida (ex. 'match-not-started', 'match-postponed').
+        tests:
+          - not_null

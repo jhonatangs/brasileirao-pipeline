@@ -1,0 +1,31 @@
+
+version: 2
+
+models:
+  - name: stg_transfermarkt_players
+    description: "Dados de jogadores obtidos via raspagem do Transfermarkt, limpos e padronizados."
+    columns:
+      - name: time_nome
+        description: "Nome do time do jogador no Transfermarkt."
+        tests:
+          - not_null
+      - name: nome
+        description: "Nome do jogador."
+        tests:
+          - not_null
+      - name: posicao
+        description: "Posição principal do jogador (ex: Goleiro, Atacante)."
+      - name: idade
+        description: "Idade do jogador em anos."
+      - name: nacionalidade
+        description: "Nacionalidade(s) do jogador."
+      - name: altura
+        description: "Altura do jogador em metros (ex: 1.85)."
+      - name: pe
+        description: "Pé preferencial do jogador."
+      - name: contrato
+        description: "Data de término de contrato."
+      - name: valor_mercado_bruto
+        description: "Valor de mercado cru conforme extraído (string)."
+      - name: valor_mercado_eur
+        description: "Valor de mercado convertido para BIGINT em Euros."

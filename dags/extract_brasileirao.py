@@ -31,11 +31,18 @@ def extract_brasileirao():
 
     extract_future_matches_task = extract_future_matches()
 
+    @task
+    def extract_transfermarket_players():
+        from include.scrapers.scrape_transfermarkt import scrape_transfermarkt
+        scrape_transfermarkt()
+
+    extract_transfermarket_players_task = extract_transfermarket_players()
+
     dbt_build = BashOperator(
         task_id="dbt_build",
         bash_command="dbt build --project-dir /usr/local/airflow/dbt_brasileirao --profiles-dir /usr/local/airflow/dbt_brasileirao"
     )
 
-    [extract_standings_task, extract_matches_task, extract_future_matches_task] >> dbt_build
+    [extract_standings_task, extract_matches_task, extract_future_matches_task, extract_transfermarket_players_task] >> dbt_build
 
 extract_brasileirao()

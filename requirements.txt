@@ -1,4 +1,5 @@
 curl-cffi
+beautifulsoup4
 pandas
 pyarrow
 fastparquet

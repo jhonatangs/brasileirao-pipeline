@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_matches_future
+    description: "Tabela de jogos futuros do Brasileirão 2026 que ainda não foram realizados."
+    columns:
+      - name: id_partida
+        description: "Identificador único da partida."
+        tests:
+          - unique
+          - not_null
+      - name: rodada
+        description: "Número da rodada do campeonato."
+      - name: data_hora
+        description: "Data e hora agendada para a partida (UTC)."
+      - name: time_mandante
+        description: "Nome do time mandante."
+      - name: time_visitante
+        description: "Nome do time visitante."
+      - name: status
+        description: "Status atual da partida (ex: 'scheduled')."

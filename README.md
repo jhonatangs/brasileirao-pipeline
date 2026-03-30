@@ -11,27 +11,27 @@ O pipeline segue a filosofia de **Medallion Architecture** (Bronze, Silver e Gol
 graph TD
     %% Fontes de Dados
     subgraph "Sources (Web)"
-        UOL[UOL Esporte]
-        TM[Transfermarkt]
+        UOL["UOL Esporte"]
+        TM["Transfermarkt"]
     end
 
     %% Camada de Ingestão (Orquestrada pelo Airflow)
     subgraph "Ingestion & Bronze (Parquet)"
-        AF[Apache Airflow Dag]
-        SCR1[Scraper Classificação]
-        SCR2[Scraper Partidas]
-        SCR3[Scraper Agenda Futura]
-        SCR4[Scraper Transfermarkt]
+        AF["Apache Airflow Dag"]
+        SCR1["Scraper Classificação"]
+        SCR2["Scraper Partidas"]
+        SCR3["Scraper Agenda Futura"]
+        SCR4["Scraper Transfermarkt"]
         
         AF -->|Orquestra| SCR1 & SCR2 & SCR3 & SCR4
         
         UOL -->|Extract| SCR1 & SCR2 & SCR3
         TM -->|Extract| SCR4
         
-        RAW1[brasileirao.parquet]
-        RAW2[partidas.parquet]
-        RAW3[jogos_futuros.parquet]
-        RAW4[transfermarkt.parquet]
+        RAW1["brasileirao.parquet"]
+        RAW2["partidas.parquet"]
+        RAW3["jogos_futuros.parquet"]
+        RAW4["transfermarkt.parquet"]
         
         SCR1 -->|Write| RAW1
         SCR2 -->|Write| RAW2
@@ -41,18 +41,18 @@ graph TD
 
     %% Camada de Transformação (dbt + DuckDB)
     subgraph "Transformation & Gold (Lakehouse)"
-        DBT[dbt build]
-        DKDB[(data/lakehouse.duckdb)]
+        DBT["dbt build"]
+        DKDB[("data/lakehouse.duckdb")]
         
         AF -->|Trigger| DBT
         
         RAW1 & RAW2 & RAW3 & RAW4 -->|Read| DBT
         
-        STG[Staging Models]
-        FCT1[fct_classificacao]
-        DIM1[dim_matches]
-        DIM2[dim_matches_future]
-        DIM3[dim_players_transfermarkt]
+        STG["Staging Models"]
+        FCT1["fct_classificacao"]
+        DIM1["dim_matches"]
+        DIM2["dim_matches_future"]
+        DIM3["dim_players_transfermarkt"]
         
         DBT -->|Creates| STG
         STG -->|Transforms| FCT1 & DIM1 & DIM2 & DIM3
@@ -62,18 +62,18 @@ graph TD
 
     %% Camada de Consumo e IA
     subgraph "AI Agent & Memory"
-        AGENT[AI Agent (gpt-4o-mini)]
-        MEM[Mem0 Layer]
-        QDR[(data/qdrant_memory)]
-        WEB[Tavily Search API]
+        AGENT["AI Agent (gpt-4o-mini)"]
+        MEM["Mem0 Layer"]
+        QDR[("data/qdrant_memory")]
+        WEB["Tavily Search API"]
         
-        USER[Usuário] -->|Pergunta NL| AGENT
+        USER["Usuário"] -->|Pergunta NL| AGENT
         
         AGENT <-->|Contexto| MEM
         MEM <-->|Persists| QDR
         
-        TOOL1[Tool: run_query]
-        TOOL2[Tool: search_web]
+        TOOL1["Tool: run_query"]
+        TOOL2["Tool: search_web"]
         
         AGENT -->|Usa| TOOL1
         AGENT -->|Usa| TOOL2

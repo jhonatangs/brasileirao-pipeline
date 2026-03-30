@@ -1,0 +1,20 @@
+services:
+  scheduler:
+    volumes:
+      - ./data:/usr/local/airflow/data
+      - ./dbt_brasileirao/target:/usr/local/airflow/dbt_brasileirao/target
+
+  api-server:
+    volumes:
+      - ./data:/usr/local/airflow/data
+      - ./dbt_brasileirao/target:/usr/local/airflow/dbt_brasileirao/target
+
+  triggerer:
+    volumes:
+      - ./data:/usr/local/airflow/data
+      - ./dbt_brasileirao/target:/usr/local/airflow/dbt_brasileirao/target
+
+  dag-processor:
+    volumes:
+      - ./data:/usr/local/airflow/data
+      - ./dbt_brasileirao/target:/usr/local/airflow/dbt_brasileirao/target
